@@ -1,0 +1,15 @@
+{% spaceless %}
+	{# The content and list pages #}
+	{% for page in pages %}
+		<url>
+			{% if page['slug'] == 'homepage' %}
+				<loc>{{ site_url }}</loc>
+				<changefreq>daily</changefreq>
+			{% else %}
+				<loc>{{ site_url }}/{{ page['slug'] }}</loc>
+				<changefreq>monthly</changefreq>
+				<lastmod>{{ page['updated']|date('Y-m-d') }}</lastmod>
+			{% endif %}
+		</url>
+	{% endfor %}
+{% endspaceless %}

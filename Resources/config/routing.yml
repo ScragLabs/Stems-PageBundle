@@ -1,0 +1,41 @@
+# Admin routes
+
+stems_admin_page_overview:
+    pattern:  /admin/pages
+    defaults: { _controller: StemsPageBundle:Admin:index }
+
+stems_admin_page_create:
+    pattern:  /admin/pages/create
+    defaults: { _controller: StemsPageBundle:Admin:create }
+
+stems_admin_page_edit:
+    pattern:  /admin/pages/{id}/edit
+    defaults: { _controller: StemsPageBundle:Admin:edit }
+
+stems_admin_page_delete:
+    pattern:  /admin/pages/{id}/delete
+    defaults: { _controller: StemsPageBundle:Admin:delete }
+
+stems_admin_page_publish:
+    pattern:  /admin/pages/{id}/publish
+    defaults: { _controller: StemsPageBundle:Admin:publish }
+
+
+# Front-end routes
+
+stems_page_front_test_mailer:
+    pattern:  /test-mailer
+    defaults: { _controller: StemsPageBundle:Front:emailTest }
+
+stems_page_front_home:
+    pattern:  /
+    defaults: { _controller: StemsPageBundle:Front:home }
+
+stems_page_front_redirect:
+    pattern:  /homepage
+    defaults: { _controller: StemsPageBundle:Front:redirect }
+
+stems_page_front_content:
+    pattern:  /{slug}
+    defaults: { _controller: StemsPageBundle:Front:page }
+

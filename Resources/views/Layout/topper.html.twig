@@ -1,0 +1,16 @@
+{% extends stems_theme ~ '.html.twig' %}
+
+{% block windowTitle %}{{ page.windowTitle }}{% endblock %}
+
+{% block layout %}
+   <div class="cms-page">
+        <div class="wrap">
+        	<div class="topper">
+	        	<p class="breadcrumb"><a href="/">Home</a> › {% block breadcrumbs %}{{ page.title }}{% endblock %}</p>
+	        	<h1>{% block title %}{{ page.title }}{% endblock %}</h1>
+	        	 {% block content %}{{ page.content|raw }}{% endblock %}
+	        </div><!--content -->
+			{% block dynamic %}{% endblock %}
+        </div><!--wrap-->
+    </div><!--content-->
+{% endblock %}

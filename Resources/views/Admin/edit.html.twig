@@ -1,0 +1,64 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit Page &middot; {{ page.title }}{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Edit Page: {{ page.title }}</h1>
+	{{ form_errors(form) }}
+	<form method="post">
+		<div class="admin-editor admin-page-editor">
+			<div class="edit-tabs">
+				<ul>
+					<li><a href="#" data-tab="edit-page-overview" class="active">General <i class="fa fa-tasks fa-fw"></i></a></li>
+					<li><a href="#" data-tab="edit-page-layout">Layout <i class="fa fa-file-text-o fa-fw"></i></a></li>
+					<li><a href="#" data-tab="edit-page-seo">SEO <i class="fa fa-bar-chart-o fa-fw"></i></a></li>
+					<li><a href="#" data-tab="edit-page-permissions">Permissions <i class="fa fa-lock fa-fw"></i></a></li>
+				</ul>
+			</div>
+			<div class="edit-panels">
+				<div class="edit-panel" id="edit-page-overview">
+					{{ form_row(form.title) }}
+					{{ form_row(form.excerpt) }}
+					{{ form_row(form.slug) }}
+					{{ form_row(form.layout) }}
+					{{ form_row(form.windowTitle) }}
+				</div>
+				<div class="edit-panel" id="edit-page-seo" style="height:0px">
+					{{ form_row(form.metaTitle) }}
+					{{ form_row(form.metaKeywords) }}
+					{{ form_row(form.metaDescription) }}
+				</div>
+				<div class="edit-panel" id="edit-page-permissions" style="height:0px">
+					Permissions go here.
+				</div>
+				<div class="edit-panel" id="edit-page-layout" style="height:0px">
+					<h2>{{ page.title }}</h2>
+					<ul class="sections">
+						{% for sectionForm in sectionForms %}
+							<li>{{ sectionForm|raw }}</li>
+						{% endfor %}
+					</ul>
+					<div id="add-section">
+						<div class="available-sections">
+							{% for type in types %}
+								<a class="btn" data-type-id="{{ type.id }}">{{ type.name }} Section</a>
+							{% endfor %}
+						</div>
+						<a class="btn btn-primary"><i class="fa fa-plus"></i> Add a New Section</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br class="clear">
+		<div class="admin-editor-controls">
+			<input class="btn btn-warning" type="submit" value="Save">
+			{% if page.status == 'Published' %}
+				<a href="{{ path('stems_admin_page_publish', { 'id' : page.id }) }}" class="btn btn-warning" >Unpublish</a>
+			{% else %}
+				<a href="{{ path('stems_admin_page_publish', { 'id' : page.id }) }}" class="btn btn-success" >Publish</a>
+			{% endif %}
+			<a href="{{ path('stems_admin_page_delete', { 'id' : page.id }) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this page?" >Delete</a>
+			<a href="{{ path('stems_admin_page_overview') }}"class="btn" >Cancel</a>
+		</div>
+	</form>
+{% endblock %}

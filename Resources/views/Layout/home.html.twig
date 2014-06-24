@@ -1,0 +1,16 @@
+{% extends stems_theme ~ '.html.twig' %}
+
+{% block windowTitle %}{{ page.windowTitle }}{% endblock %}
+
+{% block layout %}
+   <div class="cms-page">
+   		<div class="wrap">
+			{{ render(controller('StemsBlogBundle:Widget:homepageFeature')) }}
+			{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks')) }}
+		</div>
+		{% block breadcrumbs %}{% endblock %}
+		{% block title %}{% endblock %}
+		{% block content %}{% endblock %}
+		{% block dynamic %}{% endblock %}
+	</div><!--content-->
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "admin.html.twig" %}
+
+{% block title %}Pages Overview{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Pages</h1>
+	<div class="controls">
+		<a href="/admin/pages/create" class="btn btn-primary right"><i class="fa fa-plus"></i> Add New Page</a>
+		<br class="clear"/>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th><a>Title &amp; Excerpt</a></th>
+				<th><a>Url</a></th>
+				<th width="40"><a>Type</a></th>
+				<th><a>Layout</a></th>
+				<th><a>Author</a></th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for page in pages %}
+				<tr>
+					<td><h4>{{ page.title }}</h4><p class="subtext">{{ page.excerpt }}</p></td>
+					<td>
+						{% if page.type == 'dynamic-item' %}
+							<p class="no-link">/{{ page.slug }}</p> 
+						{% else %}
+							<a href="/{{ page.slug }}">/{{ page.slug }}</a>
+						{% endif %}
+					</td>
+					<td>{{ page.type }}</td>
+					<td>{{ page.layout.name }}</td>
+					<td>{{ page.author }}</td>
+					<td>
+						<a href="/admin/pages/{{ page.id }}/edit" class="btn btn-circle btn-small"><i class="fa fa-pencil"></i></a> 
+						<a href="/admin/pages/{{ page.id }}/delete" class="btn btn-danger btn-circle btn-small"><i class="fa fa-times"></i></a> 
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6"><p>There are no pages</p></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><a>Title &amp; Excerpt</a></th>
+				<th><a>Url</a></th>
+				<th><a>Type</a></th>
+				<th><a>Layout</a></th>
+				<th><a>Author</a></th>
+				<th>Actions</th>
+			</tr>
+		</tfoot>
+	</table>
+
+{% endblock %}

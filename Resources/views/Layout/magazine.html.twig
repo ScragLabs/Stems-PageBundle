@@ -1,0 +1,27 @@
+{% extends stems_theme ~ '.html.twig' %}
+
+{% block windowTitle %}{{ page.windowTitle }}{% endblock %}
+
+{% block layout %}
+   <div class="cms-page">
+        <div class="wrap">
+        	<div class="layout-magazine">
+	        	<p class="breadcrumb"><a href="/">Home</a> › {% block breadcrumbs %}{{ page.title }}{% endblock %}</p>
+	        	<div class="content">
+	            	{% block content %}{{ page.content|raw }}{% endblock %}
+					{% block dynamic %}{% endblock %}
+				</div>
+				<div class="sidebar">
+					<div class="snap">
+						{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:latestEditorsPick')) }}
+						{{ render(controller('StemsSocialBundle:Widget:instagramSlider')) }}
+						{% if page.slug != 'magazine' %}
+							<a href="/magazine">Go Back to the Magazine</a>
+						{% endif %}
+					</div>
+				</div>
+				<br class="clear">
+			</div>
+        </div>
+    </div>
+{% endblock %}
