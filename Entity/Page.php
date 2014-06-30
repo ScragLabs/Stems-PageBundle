@@ -87,6 +87,11 @@ class Page
      */
     protected $showInMenu = true;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $noIndex = false;
+
     /** 
      * @ORM\Column(type="string", nullable=true)
      */
@@ -494,6 +499,29 @@ class Page
     public function getSections()
     {
         return $this->sections;
+    }
+
+    /**
+     * Set noIndex
+     *
+     * @param boolean $noIndex
+     * @return Page
+     */
+    public function setNoIndex($noIndex)
+    {
+        $this->noIndex = $noIndex;
+    
+        return $this;
+    }
+
+    /**
+     * Get noIndex
+     *
+     * @return boolean 
+     */
+    public function getNoIndex()
+    {
+        return $this->noIndex;
     }
 
     /**

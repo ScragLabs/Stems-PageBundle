@@ -56,6 +56,12 @@ class AdminPageType extends AbstractType
 		// 	'error_bubbling' 	=> true,
 		// ));	
 
+		$builder->add('noIndex', null, array(
+			'label'  			=> 'No Index',
+			'required'			=> false,
+			'error_bubbling' 	=> true,
+		));
+
 		$builder->add('metaTitle', null, array(
 			'label'  			=> 'Meta Title',
 			'required'			=> false,
