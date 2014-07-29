@@ -7,6 +7,14 @@ use Stems\PageBundle\Exception\PageNotFoundException;
 
 class PageRepository extends EntityRepository
 {
+	/**
+	 * Load the page entity that matches the slug provided and override options provided
+	 *
+	 * @param string $slug 				The slug of the page to load
+	 * @param array $options 			An indexed array of properties to override for the page
+	 * @return Page 					The page entity
+	 * @throws PageNotFoundException
+	 */
 	public function load($slug, $options=array())
 	{
 		// load the relevant CMS page from the database
@@ -34,6 +42,21 @@ class PageRepository extends EntityRepository
 			!empty($options['disableAnalytics']) and $page->setMetaDescription($options['disableAnalytics']);
 		}
 			
+		return $page;
+	}
+
+	/**
+	 * Attempt to find a matching page given a uri path
+	 *
+	 * @param string $slug 			The request path to match to a page
+	 * @return Page 				The page entity found, or null if not found
+	 */
+	public function estimate($path)
+	{
+		// load the relevant CMS page from the database
+		// @todo - make the query to estimate
+		$page = null;
+
 		return $page;
 	}
 }
