@@ -29,7 +29,7 @@ class Page
      * @ORM\ManyToOne(targetEntity="Layout", inversedBy="pages")
      * @ORM\JoinColumn(name="layout_id", referencedColumnName="id")
      */
-    protected $layout = 1;
+    protected $layout;
 
     /**
      * @ORM\ManyToOne(targetEntity="Page", inversedBy="children")

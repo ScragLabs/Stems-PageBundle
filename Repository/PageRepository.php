@@ -101,8 +101,6 @@ class PageRepository extends EntityRepository
 		    }
 		}
 
-		die();
-
 		// fallback if no matches found
 		return null;
 	}
