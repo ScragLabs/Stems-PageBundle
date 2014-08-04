@@ -53,7 +53,7 @@ class FrontController extends Controller
 			$id = end($id);
 
 			// get the product
-			$product = $em->getRepository('StemsSaleSirenBundle:Product')->find($id);
+			$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
 
 			// escape if it not longer exists
 			if ($product) {
