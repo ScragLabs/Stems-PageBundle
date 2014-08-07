@@ -33,7 +33,7 @@
 					</td>
 					<td>{{ page.type }}</td>
 					<td>{{ page.layout.name }}</td>
-					<td>{{ page.author }}</td>
+					<td>{{ page.author|username }}</td>
 					<td>
 						<a href="/admin/pages/{{ page.id }}/edit" class="btn btn-circle btn-small"><i class="fa fa-pencil"></i></a> 
 						<a href="/admin/pages/{{ page.id }}/delete" class="btn btn-danger btn-circle btn-small"><i class="fa fa-times"></i></a> 
