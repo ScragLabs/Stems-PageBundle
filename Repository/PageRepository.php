@@ -2,16 +2,16 @@
 
 namespace Stems\PageBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use Stems\PageBundle\Exception\PageNotFoundException;
+use Doctrine\ORM\EntityRepository,
+	Stems\PageBundle\Exception\PageNotFoundException;
 
 class PageRepository extends EntityRepository
 {
 	/**
 	 * Load the page entity that matches the slug provided and override options provided
 	 *
-	 * @param string $slug 				The slug of the page to load
-	 * @param array $options 			An indexed array of properties to override for the page
+	 * @param  string 	$slug 			The slug of the page to load
+	 * @param  array 	$options 		An indexed array of properties to override for the page
 	 * @return Page 					The page entity
 	 * @throws PageNotFoundException
 	 */
@@ -48,7 +48,7 @@ class PageRepository extends EntityRepository
 	/**
 	 * Attempt to find a matching page given a uri path
 	 *
-	 * @param string $slug 			The request path to match to a page
+	 * @param  string 	$slug 		The request path to match to a page
 	 * @return Page 				The page entity found, or null if not found
 	 */
 	public function estimate($path)
