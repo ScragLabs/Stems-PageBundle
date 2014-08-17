@@ -5,6 +5,7 @@
 {% block layout %}
 	<div class="cms-page">
 		<div class="layout-responsive-cover">
+			{% block title %}<h1>{{ page.title }}</h1>{% endblock %}
 			<p class="breadcrumb"><a href="/">Home</a> › {% block breadcrumbs %}{% endblock %}</p>
 			{% block content %}{{ page.content|raw }}{% endblock %}
 			{% block dynamic %}{% endblock %}
