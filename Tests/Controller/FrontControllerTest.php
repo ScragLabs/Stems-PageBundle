@@ -2,46 +2,27 @@
 
 namespace StemsPageBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use StemsCoreBundle\Tests\Controller\BaseFrontControllerTest;
 
-class FrontControllerTest extends BaseFrontFrontControllerTest
+class FrontControllerTest extends BaseFrontControllerTest
 {
-	protected $client;
-
-	public function __construct() 
+	public function testHome()
 	{
-		$this->client = static::createClient();
+		// can the page be loaded from the CMS
+		$crawler = $this->assertCmsLoadable('/', 'homepage');
 	}
 
-    public function testHome()
-    {
-    	// load the page
-        $crawler = $this->client->request('GET', '/');
+	public function testRedirect()
+	{
+		// the "/homepage" uri should redirect to "/"
+		$crawler = $this->client->request('GET', '/homepage');
 
-        // check any content loaded
-        $this->assertTrue($crawler->filter('.cms-page')->count() > 0);
+		$this->assertTrue($this->client->getResponse()->isRedirect('/'));
+	}
 
-        // optional test cases based on restful or paginated loading
-        if ($this->assertTrue($crawler->filter('.rest-load-more')->count() > 0)) {
-
-        }
-    }
-
-    public function testRedirect()
-    {
-    	// load the page for the first ever blog post
-        $crawler = $this->client->request('GET', '/magazine/the-wedding-guest-edit');
-
-        // check any content loaded
-        $this->assertTrue($crawler->filter('.cms-page')->count() > 0);
-    }
-
-    public function testPage()
-    {
-        // try to load the about page
-        $crawler = $this->client->request('GET', '/about');
-
-        // check any content loaded
-        $this->assertTrue($crawler->filter('body')->count() > 0);
-    }
+	public function testPage()
+	{
+		// use the about page to see if we can load a CMS content page
+		$crawler = $this->assertCmsLoadable('/about', 'about');
+	}
 }
