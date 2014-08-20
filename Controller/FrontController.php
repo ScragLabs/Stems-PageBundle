@@ -13,12 +13,10 @@ class FrontController extends Controller
 	 */
 	public function homeAction()
 	{
-		$em = $this->getDoctrine()->getManager();
-		
-		// load the page object from the CMS
+		// Load the page object from the CMS
+		$em   = $this->getDoctrine()->getManager();
 		$page = $em->getRepository('StemsPageBundle:Page')->load('homepage');
 
-		// render the requested page
 		return $this->render('StemsPageBundle:Front:page.html.twig', array(
 			'page' 	=> $page
 		));
@@ -34,34 +32,15 @@ class FrontController extends Controller
 
 	/**
 	 * Renders a static content page with default fallback values.
+	 *
 	 * @param $slug string The slug of the page requested
 	 */
 	public function pageAction($slug)
 	{
-		$em = $this->getDoctrine()->getManager();
+		// Attempt to load the requested page
+		$em   = $this->getDoctrine()->getManager();
+		$page = $em->getRepository('StemsPageBundle:Page')->load($slug);
 
-		try
-		{
-			// load the page object from the CMS
-			$page = $em->getRepository('StemsPageBundle:Page')->load($slug);
-		}
-		catch (\Exception $e) 
-		{
-			// 301 for product error pages indexed by google
-			// get the id from the slug
-			$id = explode('-', $slug);
-			$id = end($id);
-
-			// get the product
-			$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
-
-			// escape if it not longer exists
-			if ($product) {
-				return $this->redirect('/product/'.$product->getSlug(), 301);
-			}
-		}
-
-		// render the requested page
 		return $this->render('StemsPageBundle:Front:page.html.twig', array(
 			'page' 	=> $page
 		));
