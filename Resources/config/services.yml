@@ -1,7 +1,2 @@
-parameters:
-#    ste_beatracker.example.class: ThreadAndMirror\ProductsBundle\Example
-
 services:
-#    ste_beatracker.example:
-#        class: %ste_beatracker.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+

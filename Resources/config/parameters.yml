@@ -1,0 +1,9 @@
+parameters:
+
+    # Admin menu items
+    stems.admin.menu_core_stemspagebundle:
+        stems_page:
+            title: 'Pages'
+            route: 'stems_admin_page_overview'
+            icon: 'fa fa-file-text-o'
+            children: []
