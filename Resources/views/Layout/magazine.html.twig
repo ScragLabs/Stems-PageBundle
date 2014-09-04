@@ -5,7 +5,7 @@
 {% block layout %}
    <div class="cms-page">
         <div class="wrap">
-        	<div class="layout-magazine">
+        	<div class="layout-blog">
 	        	<p class="breadcrumb"><a href="/">Home</a> › {% block breadcrumbs %}{{ page.title }}{% endblock %}</p>
 	        	<div class="content">
 	            	{% block content %}{{ page.content|raw }}{% endblock %}
@@ -15,8 +15,8 @@
 					<div class="snap">
 						{{ render(controller('ThreadAndMirrorSocialBundle:Widget:latestPosts')) }}
 						{{ render(controller('StemsSocialBundle:Widget:instagramSlider')) }}
-						{% if page.slug != 'magazine' %}
-							<a href="/magazine">Go Back to the Magazine</a>
+						{% if page.slug != 'blog' %}
+							<a href="/blog">Go Back to the Blog</a>
 						{% endif %}
 					</div>
 				</div>
