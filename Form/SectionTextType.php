@@ -21,6 +21,7 @@ class SectionTextType extends AbstractType
 			'label'     		=> 'Add Text',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
+			'attr'				=> array('class' => 'markitup'),
 		));	
 	}
 

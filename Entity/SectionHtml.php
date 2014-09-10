@@ -5,13 +5,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
-use Stems\PageBundle\Definition\SectionInstanceInterface;
+use Stems\CoreBundle\Definition\SectionInstanceInterface;
 
 /** 
  * @ORM\Entity
- * @ORM\Table(name="stm_page_section_text")
+ * @ORM\Table(name="stm_page_section_html")
  */
-class SectionText implements SectionInstanceInterface
+class SectionHtml implements SectionInstanceInterface
 {
     /** 
      * @ORM\Id
@@ -31,7 +31,7 @@ class SectionText implements SectionInstanceInterface
     public function render($services, $link)
     {
         // render the twig template
-        return $services->getTwig()->render('StemsBlogBundle:Section:text.html.twig', array(
+        return $services->getTwig()->render('StemsBlogBundle:Section:html.html.twig', array(
             'section'   => $this,
             'link'      => $link,
         ));
@@ -46,7 +46,7 @@ class SectionText implements SectionInstanceInterface
         $form = $services->createSectionForm($link, $this);
 
         // render the admin form html
-        return $services->getTwig()->render('StemsBlogBundle:Section:textForm.html.twig', array(
+        return $services->getTwig()->render('StemsBlogBundle:Section:htmlForm.html.twig', array(
             'form'      => $form->createView(),
             'link'      => $link,
         ));
@@ -58,8 +58,8 @@ class SectionText implements SectionInstanceInterface
     public function save($services, $parameters, $request, $link)
     {
         // save the values
-        $this->setContent(stripslashes($parameters['content']));
-        
+        $section->setContent($parameters['content']);
+
         $services->getManager()->persist($this);
     }
 

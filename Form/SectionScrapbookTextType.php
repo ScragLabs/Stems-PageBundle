@@ -17,7 +17,7 @@ class SectionScrapbookTextType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		$builder->add('content', 'content', array(
+		$builder->add('content', 'textarea', array(
 			'label'     		=> 'Content',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
