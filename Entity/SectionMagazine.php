@@ -101,7 +101,7 @@ class SectionMagazine implements SectionInstanceInterface
 	public function render($services, $link)
 	{
 		// render the twig template
-		return $services->getTwig()->render('StemsBlogBundle:Section:magazine.html.twig', array(
+		return $services->getTwig()->render('StemsPageBundle:Section:magazine.html.twig', array(
 			'section'   => $this,
 			'link'      => $link,
 		));
@@ -116,7 +116,7 @@ class SectionMagazine implements SectionInstanceInterface
 		$form = $services->createSectionForm($link, $this);
 
 		// render the admin form html
-		return $services->getTwig()->render('StemsBlogBundle:Section:magazineForm.html.twig', array(
+		return $services->getTwig()->render('StemsPageBundle:Section:magazineForm.html.twig', array(
 			'form'      => $form->createView(),
 			'section'   => $this,
 			'link'      => $link,

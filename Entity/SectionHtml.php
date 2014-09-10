@@ -31,7 +31,7 @@ class SectionHtml implements SectionInstanceInterface
     public function render($services, $link)
     {
         // render the twig template
-        return $services->getTwig()->render('StemsBlogBundle:Section:html.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:html.html.twig', array(
             'section'   => $this,
             'link'      => $link,
         ));
@@ -46,7 +46,7 @@ class SectionHtml implements SectionInstanceInterface
         $form = $services->createSectionForm($link, $this);
 
         // render the admin form html
-        return $services->getTwig()->render('StemsBlogBundle:Section:htmlForm.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:htmlForm.html.twig', array(
             'form'      => $form->createView(),
             'link'      => $link,
         ));

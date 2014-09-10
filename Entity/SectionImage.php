@@ -50,7 +50,7 @@ class SectionImage implements SectionInstanceInterface
 	public function render($services, $link)
 	{
 		// Render the twig template
-		return $services->getTwig()->render('StemsBlogBundle:Section:image.html.twig', array(
+		return $services->getTwig()->render('StemsPageBundle:Section:image.html.twig', array(
 			'section'   => $this,
 			'link'      => $link,
 		));
@@ -69,7 +69,7 @@ class SectionImage implements SectionInstanceInterface
 		$form = $services->createSectionForm($link, $this);
 
 		// Render the admin form html
-		return $services->getTwig()->render('StemsBlogBundle:Section:imageForm.html.twig', array(
+		return $services->getTwig()->render('StemsPageBundle:Section:imageForm.html.twig', array(
 			'form'      => $form->createView(),
 			'section'	=> $this,
 			'link'      => $link,

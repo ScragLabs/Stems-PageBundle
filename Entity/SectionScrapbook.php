@@ -72,7 +72,7 @@ class SectionScrapbook implements SectionInstanceInterface
     public function render($services, $link)
     {
         // render the twig template
-        return $services->getTwig()->render('StemsBlogBundle:Section:scrapbook.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:scrapbook.html.twig', array(
             'section'   => $this,
             'link'      => $link,
         ));
@@ -92,7 +92,7 @@ class SectionScrapbook implements SectionInstanceInterface
 
         foreach ($this->getImages() as $image) {
             $imageForm = $services->createSubSectionForm($image);
-            $imageForms[] = $services->getTwig()->render('StemsBlogBundle:Section:scrapbookImageForm.html.twig', array(
+            $imageForms[] = $services->getTwig()->render('StemsPageBundle:Section:scrapbookImageForm.html.twig', array(
                 'form'      => $imageForm->createView(),
                 'image'     => $image,
             ));
@@ -100,14 +100,14 @@ class SectionScrapbook implements SectionInstanceInterface
 
         foreach ($this->getTexts() as $text) {
             $textForm = $services->createSubSectionForm($text);
-            $textForms[] = $services->getTwig()->render('StemsBlogBundle:Section:scrapbookTextForm.html.twig', array(
+            $textForms[] = $services->getTwig()->render('StemsPageBundle:Section:scrapbookTextForm.html.twig', array(
                 'form'     => $textForm->createView(),
                 'text'     => $text,
             ));
         }
 
         // render the admin form html
-        return $services->getTwig()->render('StemsBlogBundle:Section:scrapbookForm.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:scrapbookForm.html.twig', array(
             'form'          => $form->createView(),
             'link'          => $link,
             'section'       => $this,
