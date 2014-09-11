@@ -5,13 +5,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
+use Stems\CoreBundle\Definition\SectionInstanceInterface;
 
 
 /** 
  * @ORM\Entity
  * @ORM\Table(name="stm_page_section_textandimage")
  */
-class SectionTextAndImage
+class SectionTextAndImage implements SectionInstanceInterface
 {
     /** 
      * @ORM\Id
@@ -44,6 +45,54 @@ class SectionTextAndImage
      * @ORM\Column(type="text", nullable=true)
      */
     protected $link;
+
+    /** 
+     * @ORM\Column(type="boolean")
+     */
+    protected $wrap = false;
+
+    /**
+     * Build the html for rendering in the front end, using any nessary custom code
+     */
+    public function render($services, $link)
+    {
+        // render the twig template
+        return $services->getTwig()->render('StemsPageBundle:Section:textAndImage.html.twig', array(
+            'section'   => $this,
+            'link'      => $link,
+        ));
+    }
+
+    /**
+     * Build the html for admin editor form
+     */
+    public function editor($services, $link)
+    {
+        // build the section from using the generic builder method
+        $form = $services->createSectionForm($link, $this);
+
+        // render the admin form html
+        return $services->getTwig()->render('StemsPageBundle:Section:textAndImageForm.html.twig', array(
+            'form'      => $form->createView(),
+            'section'   => $this,
+            'link'      => $link,
+        ));
+    }
+
+    /**
+     * Update the section from posted data
+     */
+    public function save($services, $parameters, $request, $link)
+    {
+        // save the values
+        $this->setContent(stripslashes($parameters['content']));
+        $this->setImage($parameters['image']);
+        $this->setCaption(stripslashes($parameters['caption']));
+        $this->setPosition($parameters['position']);
+        $this->setLink($parameters['link']);
+
+        $services->getManager()->persist($this);
+    }
 
     /**
      * Get id
@@ -168,5 +217,28 @@ class SectionTextAndImage
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * Set wrap
+     *
+     * @param string $wrap
+     * @return SectionTextAndImage
+     */
+    public function setWrap($wrap)
+    {
+        $this->wrap = $wrap;
+    
+        return $this;
+    }
+
+    /**
+     * Get wrap
+     *
+     * @return string 
+     */
+    public function getWrap()
+    {
+        return $this->wrap;
     }
 }

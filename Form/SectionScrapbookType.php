@@ -27,6 +27,7 @@ class SectionScrapbookType extends AbstractType
 			'label'     		=> 'Caption',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
+			'attr'				=> array('class' => 'markitup'),
 		));	
 
 		$builder->add('contentX', 'text', array(

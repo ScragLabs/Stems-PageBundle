@@ -5,13 +5,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
-
+use Stems\CoreBundle\Definition\SectionInstanceInterface;
 
 /** 
  * @ORM\Entity
  * @ORM\Table(name="stm_page_section_scrapbook")
  */
-class SectionScrapbook
+class SectionScrapbook implements SectionInstanceInterface
 {
     /** 
      * @ORM\Id
@@ -66,6 +66,72 @@ class SectionScrapbook
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+    /**
+     * Build the html for rendering in the front end, using any nessary custom code
+     */
+    public function render($services, $link)
+    {
+        // render the twig template
+        return $services->getTwig()->render('StemsPageBundle:Section:scrapbook.html.twig', array(
+            'section'   => $this,
+            'link'      => $link,
+        ));
+    }
+
+    /**
+     * Build the html for admin editor form
+     */
+    public function editor($services, $link)
+    {
+        // build the section from using the generic builder method
+        $form = $services->createSectionForm($link, $this);
+
+        // get forms for the different scraps attached in the scrapbook
+        $imageForms = array();
+        $textForms = array();
+
+        foreach ($this->getImages() as $image) {
+            $imageForm = $services->createSubSectionForm($image);
+            $imageForms[] = $services->getTwig()->render('StemsPageBundle:Section:scrapbookImageForm.html.twig', array(
+                'form'      => $imageForm->createView(),
+                'image'     => $image,
+            ));
+        }
+
+        foreach ($this->getTexts() as $text) {
+            $textForm = $services->createSubSectionForm($text);
+            $textForms[] = $services->getTwig()->render('StemsPageBundle:Section:scrapbookTextForm.html.twig', array(
+                'form'     => $textForm->createView(),
+                'text'     => $text,
+            ));
+        }
+
+        // render the admin form html
+        return $services->getTwig()->render('StemsPageBundle:Section:scrapbookForm.html.twig', array(
+            'form'          => $form->createView(),
+            'link'          => $link,
+            'section'       => $this,
+            'imageForms'    => $imageForms,
+            'textForms'     => $textForms,
+        ));
+    }
+
+    /**
+     * Update the section from posted data
+     */
+    public function save($services, $parameters, $request, $link)
+    {
+        // save the values
+        $this->setTitle($parameters['title']);
+        $this->setContent($parameters['content']);
+        $this->setContentX($parameters['contentX']);
+        $this->setContentY($parameters['contentY']);
+        $this->setBackground($parameters['height']);
+        $this->setBackground($parameters['background']);
+        
+        $services->getManager()->persist($this);
+    }
+
     /**
      * Get id
      *

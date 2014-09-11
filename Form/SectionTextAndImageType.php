@@ -21,6 +21,7 @@ class SectionTextAndImageType extends AbstractType
 			'label'     		=> 'Text Content',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
+			'attr'				=> array('class' => 'markitup'),
 		));	
 
 		$builder->add('image', 'text', array(
@@ -35,6 +36,7 @@ class SectionTextAndImageType extends AbstractType
 			'choices'			=> array('right' => 'Right', 'left' => 'Left'),
 			'required'			=> false,
 			'error_bubbling' 	=> true,
+			'attr'				=> array('class' => 'section_textandimage_type_position'),
 		));	
 
 		$builder->add('caption', 'text', array(
@@ -45,6 +47,12 @@ class SectionTextAndImageType extends AbstractType
 
 		$builder->add('link', 'text', array(
 			'label'     		=> 'Image Link',
+			'required'			=> false,
+			'error_bubbling' 	=> true,
+		));	
+
+		$builder->add('wrap', 'checkbox', array(
+			'label'     		=> 'Wrap Content Around Image?',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
 		));	

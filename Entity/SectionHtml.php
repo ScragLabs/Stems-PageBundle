@@ -9,9 +9,9 @@ use Stems\CoreBundle\Definition\SectionInstanceInterface;
 
 /** 
  * @ORM\Entity
- * @ORM\Table(name="stm_page_section_text")
+ * @ORM\Table(name="stm_page_section_html")
  */
-class SectionText implements SectionInstanceInterface
+class SectionHtml implements SectionInstanceInterface
 {
     /** 
      * @ORM\Id
@@ -31,7 +31,7 @@ class SectionText implements SectionInstanceInterface
     public function render($services, $link)
     {
         // render the twig template
-        return $services->getTwig()->render('StemsPageBundle:Section:text.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:html.html.twig', array(
             'section'   => $this,
             'link'      => $link,
         ));
@@ -46,7 +46,7 @@ class SectionText implements SectionInstanceInterface
         $form = $services->createSectionForm($link, $this);
 
         // render the admin form html
-        return $services->getTwig()->render('StemsPageBundle:Section:textForm.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:htmlForm.html.twig', array(
             'form'      => $form->createView(),
             'link'      => $link,
         ));
@@ -58,8 +58,8 @@ class SectionText implements SectionInstanceInterface
     public function save($services, $parameters, $request, $link)
     {
         // save the values
-        $this->setContent(stripslashes($parameters['content']));
-        
+        $section->setContent($parameters['content']);
+
         $services->getManager()->persist($this);
     }
 
