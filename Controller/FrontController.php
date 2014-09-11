@@ -19,7 +19,7 @@ class FrontController extends Controller
 
 		return $this->render('StemsPageBundle:Front:page.html.twig', array(
 			'page' 	=> $page
-		));
+		))->setMaxAge(300);
 	}
 
 	/**
@@ -43,7 +43,7 @@ class FrontController extends Controller
 
 		return $this->render('StemsPageBundle:Front:page.html.twig', array(
 			'page' 	=> $page
-		));
+		))->setMaxAge(300);
 	}
 
 	public function emailTestAction()
