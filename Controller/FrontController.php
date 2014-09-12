@@ -45,21 +45,4 @@ class FrontController extends Controller
 			'page' 	=> $page
 		))->setMaxAge(300);
 	}
-
-	public function emailTestAction()
-	{
-		$em = $this->getDoctrine()->getManager();
-		$user = $em->getRepository('StemsUserBundle:User')->find(2);
-
-		// send the alert
-        $message = \Swift_Message::newInstance()
-	        ->setSubject('Test message')
-	        ->setFrom('alerts@threadandmirror.com')
-	        ->setTo('join@threadandmirror.com')
-	        ->setBody('<p>woooohooooooo</p>')
-	    ;
-	    $this->get('mailer')->send($message);
-
-	    return new Response('Test message sent to '.'join@threadandmirror.com');
-	}
 }
