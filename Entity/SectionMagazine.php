@@ -128,7 +128,8 @@ class SectionMagazine implements SectionInstanceInterface
 	 */
 	public function save($services, $parameters, $request, $link)
 	{
-		// save the values
+		var_dump($parameters);
+		// Save the values
 		$this->setContentA(stripslashes($parameters['contentA']));
 		$this->setImageA($parameters['imageA']);
 		$this->setCaptionA($parameters['captionA']);
