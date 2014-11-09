@@ -14,7 +14,7 @@
 				<div class="sidebar">
 					<div class="snap">
 						{{ render(controller('ThreadAndMirrorSocialBundle:Widget:latestPosts')) }}
-						{{ render(controller('StemsSocialBundle:Widget:instagramSlider')) }}
+						{{ render(controller('StemsSocialBundle:Widget:instagramSlider', { 'id' : 2 })) }}
 						{% if page.slug != 'blog' %}
 							<a href="/blog">Go Back to the Blog &nbsp;<i class="fa fa-angle-right"></i></a>
 						{% endif %}
