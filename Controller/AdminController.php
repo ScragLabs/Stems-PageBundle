@@ -2,20 +2,13 @@
 
 namespace Stems\PageBundle\Controller;
 
-// Dependencies
-use Stems\CoreBundle\Controller\BaseAdminController,
-	Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
-	Symfony\Component\HttpFoundation\RedirectResponse,
-	Symfony\Component\HttpFoundation\Response,
-	Symfony\Component\HttpFoundation\Request;
-
-// Forms
+use Stems\CoreBundle\Controller\BaseAdminController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Stems\PageBundle\Form\AdminPageType;
-
-// Entities
 use Stems\PageBundle\Entity\Page;
-
-// Exceptions
 use Doctrine\ORM\NoResultException;
 
 class AdminController extends BaseAdminController
@@ -96,7 +89,7 @@ class AdminController extends BaseAdminController
 
 		// throw an exception if the page could not be found
 		if (!$page) {
-			$request->getSession()->setFlash('error', 'The requested page could not be found.');
+			$request->getSession()->getFlashBag()->set('error', 'The requested page could not be found.');
 			return $this->redirect($this->generateUrl($this->home));
 		}
 
@@ -116,7 +109,7 @@ class AdminController extends BaseAdminController
 		if ($request->getMethod() == 'POST') {
 
 			// validate the submitted values
-			$form->bindRequest($request);
+			$form->bind($request);
 
 
 			//if ($form->isValid()) {
@@ -159,12 +152,12 @@ class AdminController extends BaseAdminController
 				$em->persist($page);
 				$em->flush();
 
-				$request->getSession()->setFlash('success', 'The page "'.$page->getTitle().'" has been updated.');
+				$request->getSession()->getFlashBag()->set('success', 'The page "'.$page->getTitle().'" has been updated.');
 				return $this->redirect($this->generateUrl($this->home));
 
 			//} else {
-				// $request->getSession()->setFlash('error', 'Your request was not processed as errors were found.');
-				// $request->getSession()->setFlash('debug', '');
+				// $request->getSession()->getFlashBag()->set('error', 'Your request was not processed as errors were found.');
+				// $request->getSession()->getFlashBag()->set('debug', '');
 			//}
 		}
 
@@ -193,9 +186,9 @@ class AdminController extends BaseAdminController
 			$em->flush();
 
 			// return the success message
-			$request->getSession()->setFlash('success', 'The page "'.$name.'" was successfully deleted!');
+			$request->getSession()->getFlashBag()->set('success', 'The page "'.$name.'" was successfully deleted!');
 		} else {
-			$request->getSession()->setFlash('error', 'The requested page could not be deleted as it does not exist in the database.');
+			$request->getSession()->getFlashBag()->set('error', 'The requested page could not be deleted as it does not exist in the database.');
 		}
 
 		return $this->redirect($this->generateUrl($this->home));
@@ -216,17 +209,17 @@ class AdminController extends BaseAdminController
 			if ($page->getStatus() == 'Draft') {	
 				$page->setStatus('Published');
 				$page->setPublished(new \DateTime());
-				$request->getSession()->setFlash('success', 'The page "'.$page->getTitle().'" was successfully published!');
+				$request->getSession()->getFlashBag()->set('success', 'The page "'.$page->getTitle().'" was successfully published!');
 			} else {
 				$page->setStatus('Draft');
-				$request->getSession()->setFlash('success', 'The page "'.$page->getTitle().'" was successfully unpublished!');
+				$request->getSession()->getFlashBag()->set('success', 'The page "'.$page->getTitle().'" was successfully unpublished!');
 			}
 
 			$em->persist($page);
 			$em->flush();
 
 		} else {
-			$request->getSession()->setFlash('error', 'The requested page could not be published as it does not exist in the database.');
+			$request->getSession()->getFlashBag()->set('error', 'The requested page could not be published as it does not exist in the database.');
 		}
 
 		return $this->redirect($this->generateUrl($this->home));
