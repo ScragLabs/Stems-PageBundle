@@ -68,6 +68,11 @@ class Page
     protected $content;
 
     /** 
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $image;
+
+    /** 
      * @ORM\Column(type="string", nullable=true)
      */
     protected $author;
@@ -272,6 +277,29 @@ class Page
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set image
+     *
+     * @param integer $image
+     * @return Page
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return integer 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**
