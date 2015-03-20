@@ -2,15 +2,16 @@
 
 namespace Stems\PageBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-	Symfony\Component\HttpFoundation\RedirectResponse,
-	Symfony\Component\HttpFoundation\JsonResponse,
-	Symfony\Component\HttpFoundation\Request;
-
+use Stems\CoreBundle\Controller\BaseRestController;
+use	Symfony\Component\HttpFoundation\RedirectResponse;
+use	Symfony\Component\HttpFoundation\JsonResponse;
+use	Symfony\Component\HttpFoundation\Request;
+use Stems\MediaBundle\Entity\Image;
+use Stems\MediaBundle\Form\ImageType;
 use Stems\PageBundle\Entity\Section;
 
 
-class RestController extends Controller
+class RestController extends BaseRestController
 {
 	/**
 	 * Returns form html for the requested section type
@@ -74,6 +75,53 @@ class RestController extends Controller
 				'success'	=> false,
 				'message'	=> $e->message,
 			));
+		}
+	}
+
+	/**
+	 * Updates the image for an image section
+	 *
+	 * @param  integer 		$id 	The ID of the image section
+	 * @param  Request
+	 * @return JsonResponse
+	 */
+	public function setImageSectionImageAction($id, Request $request)
+	{
+		// Get the section and existing image
+		$em      = $this->getDoctrine()->getManager();
+		$section = $em->getRepository('StemsPageBundle:SectionImage')->find($id);
+
+		if ($section->getImage()) {
+			$image = $em->getRepository('StemsMediaBundle:Image')->find($section->getImage());
+		} else {
+			$image = new Image();
+		}
+
+		// Build the form and handle the request
+		$form = $this->createForm(new ImageType(), $image);
+
+		if ($form->bind($request)) {
+
+			// Upload the file and save the entity
+			$image->doUpload();
+			$em->persist($image);
+			$em->flush();
+
+			// Get the html for updating the feature image
+			$html = $this->renderView('StemsPageBundle:Rest:setImageSectionImage.html.twig', array(
+				'section'	=> $section,
+				'image'		=> $image,
+			));
+
+			// Set the meta data for the update callback
+			$meta = array(
+				'imageType' => 'imageGalleryImage',
+				'section'	=> $section->getId(),
+			);
+
+			return $this->addHtml($html)->addMeta($meta)->setCallback('updateSectionImage')->success('Image updated.')->sendResponse();
+		} else {
+			return $this->error(array_keys($form->getErrors()), true)->sendResponse();
 		}
 	}
 }

@@ -2,8 +2,8 @@
 
 namespace Stems\PageBundle\Repository;
 
-use Doctrine\ORM\EntityRepository,
-	Stems\PageBundle\Exception\PageNotFoundException;
+use Doctrine\ORM\EntityRepository;
+use Stems\PageBundle\Exception\PageNotFoundException;
 
 class PageRepository extends EntityRepository
 {
@@ -53,18 +53,18 @@ class PageRepository extends EntityRepository
 	 */
 	public function estimate($path)
 	{
-		// segment the uri for matching
+		// Segment the uri for matching
 		$segments = explode('/', $path);
 
-		// if we have no segements then use the raw path, as it only contains one segment
+		// If we have no segements then use the raw path, as it only contains one segment
 		!$segments and $segments = array($path);
 
-		// segment in % for the SQL like comparison
+		// Segment in % for the SQL like comparison
 		array_walk($segments, function(&$item) {
 			$item = '%'.$item.'%';
 		});
 
-		// consider all pages that have least one segment in their slug as suitable candidates
+		// Consider all pages that have least one segment in their slug as suitable candidates
 		$qb = $this->getEntityManager()->createQueryBuilder();
 
 		$qb->addSelect('page');
@@ -73,7 +73,7 @@ class PageRepository extends EntityRepository
 		$qb->where('page.deleted = :deleted');
 		$qb->setParameter('deleted', '0');
 
-		// we need a like clause for each as they cannot be done via an array
+		// We need a like clause for each as they cannot be done via an array
 		$segmentLikes = array();
 
 		foreach ($segments as $i => $segment) {
@@ -81,18 +81,18 @@ class PageRepository extends EntityRepository
 			$segmentLikes[] = $qb->expr()->like('page.slug', ':segment'.$i);
 		}
 		
-		// bosh them all into an orX so we bracket them off from the delete clause
+		// Bosh them all into an orX so we bracket them off from the delete clause
 		$qb->andWhere($qb->expr()->orX()->addMultiple($segmentLikes));
 
 		$candidates = $qb->getQuery()->getResult();
 
-		// run comparison for each matched page to see if they're suitable	
+		// Run comparison for each matched page to see if they're suitable	
 		foreach ($candidates as $candidate) {
 			
-			// replace the dynamic components from the page's slug (eg. {id}) with the wildcard character
+			// Replace the dynamic components from the page's slug (eg. {id}) with the wildcard character
 			$pattern = trim(preg_replace('/\s*\{[^)]*\}/', '*', $candidate->getSlug()));
 
-			// run a the match function to compare the path against the wildcarded slug
+			// Run a the match function to compare the path against the wildcarded slug
 			$pattern = preg_quote($pattern,'/');        
 		    $pattern = str_replace( '\*' , '.*', $pattern);   
 
@@ -101,7 +101,7 @@ class PageRepository extends EntityRepository
 		    }
 		}
 
-		// fallback if no matches found
+		// Fallback if no matches found
 		return null;
 	}
 }

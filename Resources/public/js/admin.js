@@ -2,11 +2,26 @@
  * Callback to update a sections image upload
  */
 function updateSectionImage(data, originator) {
-	$('.image-preview').each(function(e) {
+	console.log('update');
+	$('.preview-image').each(function(e) {
 		if ($(this).data('type') == data.meta.imageType && $(this).data('section') == data.meta.section) {
-			$('image-preview').html(data.html).removeClass('image-preview-empty');
+			$('.preview-image').html(data.html).removeClass('image-preview-empty');
 		}
 	});
+}
+
+function updateLayoutEditorHeight() {
+
+    var height = 0;
+
+    $('.layout-editor section').each(function(){
+        if (($(this).position().top + $(this).height() + 30) > height) {
+            height = $(this).position().top + $(this).height() + 30;
+        }
+    });
+
+    $('.layout-editor').css('height', height+'px');
+    $('input.layout-height').val(height);
 }
 
 $(document).ready(function() {
@@ -33,14 +48,21 @@ $(document).ready(function() {
 		}
 	});
 
-	/** 
-	 * Scrapbook initilise draggables
-	 */
-	$('.canvas-preview .caption').draggable();
-	$('.canvas-preview .scrap').draggable();
+	
 
-	$('.admin-editor').on('dragstop', '.canvas-preview .caption', function(e) {
-		$('#section_scrapbook_type_contentX').val($(this).position().left);
-		$('#section_scrapbook_type_contentY').val($(this).position().top);
-	});
+    if ($('.layout-editor').length) {
+
+        $('.layout-editor section').draggable({
+            grid: [ 480, 5 ]
+        });
+
+        // $('#packery-editor').packery('bindUIDraggableEvents', $('#packery-editor section'));
+
+        $('.layout-editor section').on('dragstop', function(e) {
+            console.log('dragged');
+            $(this).find('.section-x').val($(this).css('left'));
+            $(this).find('.section-y').val($(this).css('top'));
+            updateLayoutEditorHeight();
+        });
+    }
 });

@@ -49,10 +49,10 @@ stems_rest_page_set_textandimagesectionimage:
     defaults: { _controller: StemsPageBundle:Rest:setTextAndImageSectionImage }
 
 
-stems_popup_page_set_textandimagesectionimage:
+stems_popup_page_set_imagesectionimage:
     pattern:  /admin/page/popup/set-imagesection-image/{id}
     defaults: { _controller: StemsPageBundle:Popup:setImageSectionImage }
 
-stems_popup_page_set_imagesectionimage:
+stems_popup_page_set_textandimagesectionimage:
     pattern:  /admin/page/popup/set-textandimagesection-image/{id}
     defaults: { _controller: StemsPageBundle:Popup:setTextAndImageSectionImage }

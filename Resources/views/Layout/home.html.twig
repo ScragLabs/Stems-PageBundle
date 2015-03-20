@@ -3,15 +3,34 @@
 {% block windowTitle %}{{ page.windowTitle }}{% endblock %}
 
 {% block layout %}
-   <div class="cms-page">
-   		<div class="wrap">
-			{{ render(controller('StemsBlogBundle:Widget:homepageFeature')) }}
-			{{ render(controller('ThreadAndMirrorSocialBundle:Widget:homepageFeature')) }}
-			{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks')) }}
+	<div class="layout-homepage">
+		<div class="homepage-banner-wrapper">
+			<div class="homepage-banner"></div>
+			<h2>Thread <span>&amp;</span> Mirror</h2>
+			<h1>Fashion and Beauty</h1>
+			<p>created for you, curated by you</p>
 		</div>
-		{% block breadcrumbs %}{% endblock %}
-		{% block title %}{% endblock %}
-		{% block content %}{% endblock %}
-		{% block dynamic %}{% endblock %}
-	</div><!--content-->
+	   	<div class="cms-page">
+			{{ render(controller('StemsBlogBundle:Widget:homepageFeature')) }}
+{# 			{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:singleItem')) }} #}
+			{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks')) }}
+			{{ render(controller('ThreadAndMirrorSocialBundle:Widget:homepageFeature')) }}
+			<div class="widget follow-us-widget">
+				<div class="wrap">
+					<p>Follow us</p>
+					<div class="social">
+						<a href="http://www.pinterest.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-pinterest"></i></a>
+						<a href="http://instagram.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-instagram"></i></a>
+						<a href="http://www.twitter.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-twitter"></i></a>
+						<a href="http://www.facebook.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-facebook"></i></a>
+						<br class="clear">
+					</div>
+				</div>
+			</div>
+			{% block breadcrumbs %}{% endblock %}
+			{% block title %}{% endblock %}
+			{% block content %}{% endblock %}
+			{% block dynamic %}{% endblock %}
+		</div><!--content-->
+	</div>
 {% endblock %}

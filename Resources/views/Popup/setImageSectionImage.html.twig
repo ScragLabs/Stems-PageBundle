@@ -18,7 +18,7 @@
 			<label>Current Image</label>
 			<div class="popup-image-preview" 
 				{% if section.image is not empty %}
-					{# style="background-image:url('{{ getMediaImage(section.image).src }}')" #}
+					style="background-image:url('{{ getMediaImage(section.image).src }}')"
 				{% elseif existing is not empty %}
 					style="background-image:url('{{ existing }}')"
 				{% endif %}

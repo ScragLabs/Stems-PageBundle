@@ -1,0 +1,16 @@
+<section class="col-{{ link.width }} section-{{ link.type|replace({('_'):'-'}) }} {% block classes %}{% endblock %}" style="top:{{ link.y }}px;left:{{ link.x }}px;">
+	<aside class="toolbar">
+		{% block tools %}{% endblock %}
+		{% include 'StemsPageBundle:Toolbox:sectionColumnSpan.html.twig' %}
+		{% include 'StemsPageBundle:Toolbox:sectionRemove.html.twig' %}
+	</aside>
+	<div class="hidden-form" style="display:none">
+		{% block form %}{% endblock %}
+	</div>
+	<div class="preview">
+		{% block preview %}{% endblock %}
+	</div>
+	<input type="hidden" class="section-x" name="sections_x[{{ link.id }}]" value="{{ link.x }}">
+	<input type="hidden" class="section-y" name="sections_y[{{ link.id }}]" value="{{ link.y }}">
+	<input type="hidden" name="sections[]" value="{{ link.id }}">
+</section>

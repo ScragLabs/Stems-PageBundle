@@ -1,0 +1,28 @@
+{% extends stems_theme ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block windowTitle %}{{ page.windowTitle }}{% endblock %}
+
+{% block layout %}
+   	<div class="cms-page">
+		<div class="layout-banner-inset">
+			<div class="banner-wrapper">
+				{% block banner %}
+					<div class="banner" style="background-image:url('{{ getMediaImage(page.image).src|imagine_filter('page_banner') }}')"></div>
+					<div class="banner-thumbnail" style="background-image:url('{{ getMediaImage(page.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
+					<div class="banner-inset">
+			  			{% block title %}<h1>{{ page.title }}</h1>{% endblock %}
+			  			<hr>
+			  			{% block content %}
+							{% if page.content is not empty %}<p>{{ page.content|raw }}</p>{% endif %}
+			  			{% endblock %}
+			  		</div>
+		  		{% endblock %}
+			</div>
+			<div class="wrapper">
+				{% block dynamic %}{% endblock %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

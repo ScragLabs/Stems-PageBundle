@@ -28,7 +28,7 @@ class SectionImage implements SectionInstanceInterface
 	/** 
 	 * @ORM\Column(type="text", nullable=true)
 	 */
-	protected $position = 'center';
+	protected $position = 'squared';
 
 	/** 
 	 * @ORM\Column(type="text", nullable=true)
@@ -89,7 +89,7 @@ class SectionImage implements SectionInstanceInterface
 		// Save the values
 		$this->setImage($parameters['image']);
 		$this->setCaption($parameters['caption']);
-		$this->setPosition($parameters['position']);
+		// $this->setPosition($parameters['position']);
 		$this->setLink($parameters['link']);
 		
 		$services->getManager()->persist($this);

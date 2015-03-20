@@ -1,0 +1,16 @@
+{% extends 'StemsPageBundle:Section:baseForm.html.twig' %}
+
+{% block classes %}{% spaceless %}text-align-{{ form.vars.value.alignment }}{% endspaceless %}{% endblock %}
+
+{% block tools %}
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}
+
+{% block preview %}
+	{{ form_widget(form.content) }}
+	<{{ form.vars.value.style }}>{{ form.vars.value.content|raw }}</{{ form.vars.value.style }}>
+{% endblock %}
