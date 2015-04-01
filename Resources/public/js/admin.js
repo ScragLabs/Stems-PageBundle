@@ -2,9 +2,8 @@
  * Callback to update a sections image upload
  */
 function updateSectionImage(data, originator) {
-	console.log('update');
 	$('.preview-image').each(function(e) {
-		if ($(this).data('type') == data.meta.imageType && $(this).data('section') == data.meta.section) {
+		if ($(this).data('id') == data.meta.section) {
 			$('.preview-image').html(data.html).removeClass('image-preview-empty');
 		}
 	});
@@ -40,14 +39,12 @@ $(document).ready(function() {
 	 */
 	$('.admin-editor').on('change', '.section_textandimage_type_position', function() {
 		var text_editor = $(this).parent().parent().parent().children('.column-text');
-		console.log('changed');
 		if ($(this).val() == 'left') {
 			$(this).parent().parent().insertBefore(text_editor);
 		} else {
 			$(this).parent().parent().insertAfter(text_editor);
 		}
 	});
-
 	
 
     if ($('.layout-editor').length) {
@@ -58,8 +55,7 @@ $(document).ready(function() {
 
         // $('#packery-editor').packery('bindUIDraggableEvents', $('#packery-editor section'));
 
-        $('.layout-editor section').on('dragstop', function(e) {
-            console.log('dragged');
+        $('.layout-editor').on('dragstop', 'section', function(e) {
             $(this).find('.section-x').val($(this).css('left'));
             $(this).find('.section-y').val($(this).css('top'));
             updateLayoutEditorHeight();
