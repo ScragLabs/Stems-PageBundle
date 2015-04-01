@@ -3,7 +3,7 @@
  */
 function updateSectionImage(data, originator) {
 	$('.preview-image').each(function(e) {
-		if ($(this).data('id') == data.meta.section) {
+		if ($(this).data('type-id') == data.meta.section && $(this).data('type') == data.meta.type) {
 			$('.preview-image').html(data.html).removeClass('image-preview-empty');
 		}
 	});
@@ -56,8 +56,8 @@ $(document).ready(function() {
         // $('#packery-editor').packery('bindUIDraggableEvents', $('#packery-editor section'));
 
         $('.layout-editor').on('dragstop', 'section', function(e) {
-            $(this).find('.section-x').val($(this).css('left'));
-            $(this).find('.section-y').val($(this).css('top'));
+            $(this).find('.section-x').val($(this).position().left);
+            $(this).find('.section-y').val($(this).position().top);
             updateLayoutEditorHeight();
         });
     }

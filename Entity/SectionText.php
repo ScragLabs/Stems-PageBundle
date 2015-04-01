@@ -48,6 +48,7 @@ class SectionText implements SectionInstanceInterface
         // render the admin form html
         return $services->getTwig()->render('StemsPageBundle:Section:textForm.html.twig', array(
             'form'      => $form->createView(),
+	        'section'   => $this,
             'link'      => $link,
         ));
     }

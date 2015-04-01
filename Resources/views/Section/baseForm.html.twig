@@ -1,4 +1,10 @@
-<section class="col-{{ link.width }} section-{{ link.type|replace({('_'):'-'}) }} {% block classes %}{% endblock %}" style="top:{{ link.y }}px;left:{{ link.x }}px;" data-id="{{ link.id }}">
+<section
+        class="col-{{ link.width }} section-{{ link.type|replace({('_'):'-'}) }} {% block classes %}{% endblock %}"
+        style="top:{{ link.y }}px;left:{{ link.x }}px;"
+        data-id="{{ link.id }}"
+        data-type="{{ link.type }}"
+        data-type-id="{{ section.id }}"
+        >
 	<aside class="toolbar">
 		{% block tools %}{% endblock %}
 		{% include 'StemsPageBundle:Toolbox:sectionColumnSpan.html.twig' %}

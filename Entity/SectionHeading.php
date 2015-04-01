@@ -59,6 +59,7 @@ class SectionHeading implements SectionInstanceInterface
         // render the admin form html
         return $services->getTwig()->render('StemsPageBundle:Section:headingForm.html.twig', array(
             'form'      => $form->createView(),
+	        'section'   => $this,
             'link'      => $link,
         ));
     }

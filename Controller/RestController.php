@@ -87,7 +87,7 @@ class RestController extends BaseRestController
 	 */
 	public function setImageSectionImageAction($id, Request $request)
 	{
-		// Get the section and existing image
+		// Get the section, link and existing image
 		$em      = $this->getDoctrine()->getManager();
 		$section = $em->getRepository('StemsPageBundle:SectionImage')->find($id);
 
@@ -115,8 +115,8 @@ class RestController extends BaseRestController
 
 			// Set the meta data for the update callback
 			$meta = array(
-				'imageType' => 'imageGalleryImage',
-				'section'	=> $section->getId(),
+				'type'      => 'image',
+				'section'	=> $id,
 			);
 
 			return $this->addHtml($html)->addMeta($meta)->setCallback('updateSectionImage')->success('Image updated.')->sendResponse();
