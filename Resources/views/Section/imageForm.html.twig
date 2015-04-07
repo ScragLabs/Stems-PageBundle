@@ -5,31 +5,9 @@
 {% endblock %}
 
 {% block form %}
-	{{ form_row(form.position) }}
-	{{ form_row(form.caption) }}
-	{{ form_row(form.link) }}
-	{{ form_widget(form.image) }}
+    {% include 'StemsPageBundle:Section:imageHiddenForm.html.twig' with { form: form } %}
 {% endblock %}
 
 {% block preview %}
-	<div class="preview-image {{ section.position }} {% if section.image is empty %}preview-image-empty-mini{% endif %}">
-		{% if section.image is not empty %}
-			<img src="{{ getMediaImage(section.image).src }}" />
-			<div class="button-holder">
-				<div>
-					<div>
-						<a class="btn btn-primary rest-get-popup" href="{{ path('stems_popup_page_set_imagesectionimage', { id : link.post.id }) }}"><i class="fa fa-picture-o"></i> Change Image</a>
-					</div>
-				</div>
-			</div>
-		{% else %}
-			<div class="button-holder">
-				<div>
-					<div>
-						<a class="btn btn-primary rest-get-popup" href="{{ path('stems_popup_page_set_imagesectionimage', { id : section.id }) }}"><i class="fa fa-picture-o"></i> Add Image</a>
-					</div>
-				</div>
-			</div>
-		{% endif %}
-	</div>
+    {% include 'StemsPageBundle:Section:imagePreview.html.twig' with { section: section } %}
 {% endblock %}

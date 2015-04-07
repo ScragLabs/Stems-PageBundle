@@ -21,8 +21,19 @@ class SectionHeadingType extends AbstractType
 			'label'     		=> 'Add Text',
 			'required'			=> false,
 			'error_bubbling' 	=> true
-		));	
-	}
+		));
+
+	    $builder->add('style', 'text', array(
+		    'label'     		=> 'Heading Style',
+		    'error_bubbling' 	=> true
+	    ));
+
+	    $builder->add('alignment', 'text', array(
+		    'label'     		=> 'Alignment',
+		    'error_bubbling' 	=> true,
+		    'attr'              => array('class' => 'section-alignment')
+	    ));
+    }
 
 	public function getName()
 	{

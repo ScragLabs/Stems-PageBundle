@@ -2,11 +2,23 @@
  * Callback to update a sections image upload
  */
 function updateSectionImage(data, originator) {
-	$('.preview-image').each(function(e) {
+	$('section').each(function(e) {
 		if ($(this).data('type-id') == data.meta.section && $(this).data('type') == data.meta.type) {
-			$('.preview-image').html(data.html).removeClass('image-preview-empty');
+            $(this).find('.preview-image').html(data.html).removeClass('image-preview-empty');
 		}
 	});
+}
+
+/**
+ * Callback to update a successfully edited section
+ */
+function updateSectionForm(data, originator) {
+    $('section').each(function(e) {
+        if ($(this).data('type-id') == data.meta.section && $(this).data('type') == data.meta.type) {
+            $(this).find('.hidden-form').html(data.meta.formHtml);
+            $(this).find('.preview').html(data.meta.previewHtml);
+        }
+    });
 }
 
 function updateLayoutEditorHeight() {
@@ -22,6 +34,18 @@ function updateLayoutEditorHeight() {
     $('.layout-editor').css('height', height+'px');
     $('input.layout-height').val(height);
 }
+
+$.fn.changeElementType = function(newType) {
+    var attrs = {};
+
+    $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+    });
+
+    this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+    });
+};
 
 $(document).ready(function() {
 

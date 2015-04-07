@@ -1,0 +1,26 @@
+{% extends 'StemsCoreBundle:Popup:default.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block classes %}{% endblock %}
+
+{% block content %}
+	<div class="two-column">
+		<div class="column">
+			<form action="{{ path('stems_page_rest_edit_image_section', { id : section.id }) }}" enctype="multipart/form-data">
+				{{ form_rest(form) }}
+			</form>
+		</div>
+		<div class="column">
+			<label>Current Image</label>
+			<div class="popup-image-preview" 
+				{% if section.image is not empty %}
+					style="background-image:url('{{ getMediaImage(section.image).src }}')"
+				{% endif %}
+			></div>
+		</div>
+		<br class="clear">
+	</div>
+	<button class="btn btn-success rest-upload-popup">Save Changes</button>
+	<br class="clear">
+{% endblock %}

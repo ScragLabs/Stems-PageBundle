@@ -1,0 +1,20 @@
+<div class="preview-image {{ section.position }} {% if section.image is empty %}preview-image-empty-mini{% endif %}">
+    {% if section.image is not empty %}
+        <img src="{{ getMediaImage(section.image).src }}" />
+        <div class="button-holder">
+            <div>
+                <div>
+                    <a class="btn btn-primary rest-get-popup" href="{{ path('stems_page_popup_edit_image_section', { id : section.id }) }}"><i class="fa fa-picture-o"></i> Change Image</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="button-holder">
+            <div>
+                <div>
+                    <a class="btn btn-primary rest-get-popup" href="{{ path('stems_page_popup_edit_image_section', { id : section.id }) }}"><i class="fa fa-picture-o"></i> Add Image</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

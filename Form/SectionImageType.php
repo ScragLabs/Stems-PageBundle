@@ -2,6 +2,7 @@
 
 namespace Stems\PageBundle\Form;
 
+use Stems\MediaBundle\Form\EmbeddedImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,29 +18,35 @@ class SectionImageType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		$builder->add('image', 'text', array(
-			'label'     		=> 'Image File',
+		$builder->add('image', 'hidden', array(
+			'label'     		=> 'Image ID',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
-			'attr'				=> array('class' => 'invisible'),
 		));	
 
 		$builder->add('position', 'choice', array(
-			'label'     		=> 'Image Position',
+			'label'     		=> 'Positioning',
 			'empty_value' 		=> false,
-			'choices'			=> array('center' => 'Center', 'right' => 'Right', 'left' => 'Left'),
+			'choices'			=> array('squared' => 'Squared', 'full-width' => 'Full Width'),
 			'required'			=> false,
 			'error_bubbling' 	=> true,
-		));	
+		));
 
-		$builder->add('caption', 'text', array(
-			'label'     		=> 'Image Caption',
+	    $builder->add('upload', new EmbeddedImageType('blog'), array(
+		    'label'     		=> 'Image File',
+		    'required'			=> false,
+		    'error_bubbling' 	=> true,
+		    'mapped'            => false,
+	    ));
+
+	    $builder->add('caption', 'text', array(
+			'label'     		=> 'Caption (Optional)',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
 		));	
 
 		$builder->add('link', 'text', array(
-			'label'     		=> 'Image Link',
+			'label'     		=> 'Link (Optional)',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
 		));	
