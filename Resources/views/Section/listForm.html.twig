@@ -1,0 +1,29 @@
+{% extends 'StemsPageBundle:Section:baseForm.html.twig' %}
+
+{% block classes %}{% spaceless %}text-align-{{ form.vars.value.alignment }} {{ form.vars.value.style }}-list{% endspaceless %}{% endblock %}
+
+{% block tools %}
+    {% include 'StemsPageBundle:Toolbox:sectionListAddItem.html.twig' %}
+    {% include 'StemsPageBundle:Toolbox:sectionListStyle.html.twig' %}
+    {% include 'StemsPageBundle:Toolbox:sectionAlignment.html.twig' %}
+{% endblock %}
+
+{% block form %}
+    {% include 'StemsPageBundle:Section:listHiddenForm.html.twig' with { form: form } %}
+{% endblock %}
+
+{% block preview %}
+    <div>
+        {{ form_widget(form.title, { attr: { class: 'wysiwig-editor' }}) }}
+        <h5 class="wysiwig-preview">{{ form.vars.value.title }}</h5>
+    </div>
+    <hr>
+    <ul>
+        {% for key, item in form.items %}
+            <li>
+                {{ form_widget(item, { attr: { class: 'wysiwig-editor' }}) }}
+                <p class="wysiwig-preview">{{ form.vars.value.items[key] }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

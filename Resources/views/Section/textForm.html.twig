@@ -13,6 +13,6 @@
 {% endblock %}
 
 {% block preview %}
-	{{ form_widget(form.content) }}
+	{{ form_widget(form.content, { attr: { class: 'wysiwig-editor' }}) }}
 	<p>{{ form.vars.value.content|raw }}</p>
 {% endblock %}

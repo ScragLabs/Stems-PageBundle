@@ -12,6 +12,6 @@
 {% endblock %}
 
 {% block preview %}
-	{{ form_widget(form.content) }}
+	{{ form_widget(form.content, { attr: { class: form.vars.value.style ~ ' wysiwig-editor' }}) }}
 	<{{ form.vars.value.style }} class="align-{{ section.alignment }}">{{ form.vars.value.content|raw }}</{{ form.vars.value.style }}>
 {% endblock %}

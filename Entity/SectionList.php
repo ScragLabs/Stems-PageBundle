@@ -10,9 +10,9 @@ use Stems\CoreBundle\Definition\SectionInstanceInterface;
 
 /** 
  * @ORM\Entity
- * @ORM\Table(name="stm_page_section_heading")
+ * @ORM\Table(name="stm_page_section_list")
  */
-class SectionHeading implements SectionInstanceInterface
+class SectionList implements SectionInstanceInterface
 {
     /** 
      * @ORM\Id
@@ -24,12 +24,17 @@ class SectionHeading implements SectionInstanceInterface
     /** 
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $content;
+    protected $title;
 
-    /** 
-     * @ORM\Column(type="text")
+	/**
+	 * @ORM\Column(type="array")
+	 */
+	protected $items = array('');
+
+    /**
+     * @ORM\Column(type="text", length=32)
      */
-    protected $style = 'h6';
+    protected $style = 'italics';
 
     /** 
      * @ORM\Column(type="text", length=16)
@@ -42,7 +47,7 @@ class SectionHeading implements SectionInstanceInterface
     public function render($services, $link)
     {
         // render the twig template
-        return $services->getTwig()->render('StemsPageBundle:Section:heading.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:list.html.twig', array(
             'section'   => $this,
             'link'      => $link,
         ));
@@ -57,7 +62,7 @@ class SectionHeading implements SectionInstanceInterface
         $form = $services->createSectionForm($link, $this);
 
         // render the admin form html
-        return $services->getTwig()->render('StemsPageBundle:Section:headingForm.html.twig', array(
+        return $services->getTwig()->render('StemsPageBundle:Section:listForm.html.twig', array(
             'form'      => $form->createView(),
 	        'section'   => $this,
             'link'      => $link,
@@ -70,9 +75,10 @@ class SectionHeading implements SectionInstanceInterface
     public function save($services, $parameters, $request, $link)
     {
         // save the values
-        $this->setContent(stripslashes($parameters['content']));
-	    $this->setAlignment(stripslashes($parameters['alignment']));
+        $this->setTitle(stripslashes($parameters['title']));
+	    $this->setItems($parameters['items']);
 	    $this->setStyle(stripslashes($parameters['style']));
+	    $this->setAlignment(stripslashes($parameters['alignment']));
 
         $services->getManager()->persist($this);
     }
@@ -88,26 +94,26 @@ class SectionHeading implements SectionInstanceInterface
     }
 
     /**
-     * Set content
+     * Set title
      *
-     * @param string $content
+     * @param string $title
      * @return Section
      */
-    public function setContent($content)
+    public function setTitle($title)
     {
-        $this->content = $content;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get content
+     * Get title
      *
      * @return string 
      */
-    public function getContent()
+    public function getTitle()
     {
-        return $this->content;
+        return $this->title;
     }
 
     /**
@@ -133,26 +139,49 @@ class SectionHeading implements SectionInstanceInterface
         return $this->style;
     }
 
+	/**
+	 * Set alignment
+	 *
+	 * @param string $alignment
+	 * @return Section
+	 */
+	public function setAlignment($alignment)
+	{
+		$this->alignment = $alignment;
+
+		return $this;
+	}
+
+	/**
+	 * Get alignment
+	 *
+	 * @return string
+	 */
+	public function getAlignment()
+	{
+		return $this->alignment;
+	}
+
     /**
-     * Set alignment
+     * Set items
      *
-     * @param string $alignment
+     * @param array $items
      * @return Section
      */
-    public function setAlignment($alignment)
+    public function setItems($items)
     {
-        $this->alignment = $alignment;
+        $this->items = $items;
     
         return $this;
     }
 
     /**
-     * Get alignment
+     * Get items
      *
-     * @return string 
+     * @return array
      */
-    public function getAlignment()
+    public function getItems()
     {
-        return $this->alignment;
+        return $this->items;
     }
 }

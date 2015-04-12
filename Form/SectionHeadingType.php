@@ -25,7 +25,8 @@ class SectionHeadingType extends AbstractType
 
 	    $builder->add('style', 'text', array(
 		    'label'     		=> 'Heading Style',
-		    'error_bubbling' 	=> true
+		    'error_bubbling' 	=> true,
+		    'attr'              => array('class' => 'section-style')
 	    ));
 
 	    $builder->add('alignment', 'text', array(
