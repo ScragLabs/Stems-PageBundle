@@ -1,15 +1,15 @@
 {% extends 'StemsPageBundle:Section:baseForm.html.twig' %}
 
-{# {% block classes %}
-	{% spaceless %}text-align-{{ form.vars.value.alignment }}{% endspaceless %}
-{% endblock %} #}
+{% block classes %}
+	{% spaceless %}alignment-{{ form.vars.value.alignment }}{% endspaceless %}
+{% endblock %}
 
 {% block tools %}
-
+    {% include 'StemsPageBundle:Toolbox:sectionAlignment.html.twig' %}
 {% endblock %}
 
 {% block form %}
-
+    {% include 'StemsPageBundle:Section:textHiddenForm.html.twig' with { form: form } %}
 {% endblock %}
 
 {% block preview %}

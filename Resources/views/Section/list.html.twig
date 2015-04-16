@@ -1,0 +1,12 @@
+{% extends 'StemsPageBundle:Section:base.html.twig' %}
+
+{% block content %}
+    <h5>{{ section.title }}</h5>
+    <ul>
+        {% for item in section.items %}
+            <li>
+                <p>{{ item|raw }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

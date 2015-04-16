@@ -25,6 +25,11 @@ class SectionText implements SectionInstanceInterface
      */
     protected $content;
 
+	/**
+	 * @ORM\Column(type="text", length=16)
+	 */
+	protected $alignment = 'left';
+
     /**
      * Build the html for rendering in the front end, using any nessary custom code
      */
@@ -60,6 +65,7 @@ class SectionText implements SectionInstanceInterface
     {
         // save the values
         $this->setContent(stripslashes($parameters['content']));
+	    $this->setAlignment(stripslashes($parameters['alignment']));
         
         $services->getManager()->persist($this);
     }
@@ -96,4 +102,28 @@ class SectionText implements SectionInstanceInterface
     {
         return $this->content;
     }
+
+
+	/**
+	 * Set alignment
+	 *
+	 * @param string $alignment
+	 * @return Section
+	 */
+	public function setAlignment($alignment)
+	{
+		$this->alignment = $alignment;
+
+		return $this;
+	}
+
+	/**
+	 * Get alignment
+	 *
+	 * @return string
+	 */
+	public function getAlignment()
+	{
+		return $this->alignment == null ? 'left' : $this->alignment;
+	}
 }
