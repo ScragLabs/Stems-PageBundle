@@ -30,6 +30,11 @@ class SectionImage implements SectionInstanceInterface
 	 */
 	protected $position = 'squared';
 
+	/**
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	protected $effect = 'none';
+
 	/** 
 	 * @ORM\Column(type="text", nullable=true)
 	 */
@@ -89,6 +94,7 @@ class SectionImage implements SectionInstanceInterface
 		// Save the values
 		$this->setImage($parameters['image']);
 		$this->setCaption($parameters['caption']);
+		$this->setEffect($parameters['effect']);
 		// $this->setPosition($parameters['position']);
 		$this->setLink($parameters['link']);
 		
@@ -149,6 +155,29 @@ class SectionImage implements SectionInstanceInterface
 	public function getPosition()
 	{
 		return $this->position;
+	}
+
+	/**
+	 * Set effect
+	 *
+	 * @param string $effect
+	 * @return SectionImage
+	 */
+	public function setEffect($effect)
+	{
+		$this->effect = $effect;
+
+		return $this;
+	}
+
+	/**
+	 * Get effect
+	 *
+	 * @return string
+	 */
+	public function getEffect()
+	{
+		return $this->effect;
 	}
 
 	/**

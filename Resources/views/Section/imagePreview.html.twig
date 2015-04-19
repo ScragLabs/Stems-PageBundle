@@ -1,6 +1,10 @@
 <div class="preview-image {{ section.position }} {% if section.image is empty %}preview-image-empty-mini{% endif %}">
     {% if section.image is not empty %}
-        <img src="{{ getMediaImage(section.image).src }}" />
+        {% if section.effect == 'cutout' %}
+            <img src="{{ getMediaImage(section.image).src|imagine_filter('section_image_medium')|transparentColor }}" />
+        {% else %}
+            <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ getMediaImage(section.image).src|imagine_filter('section_image_medium') }}" />
+        {% endif %}
         <div class="button-holder">
             <div>
                 <div>

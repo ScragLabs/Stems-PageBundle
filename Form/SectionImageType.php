@@ -43,9 +43,16 @@ class SectionImageType extends AbstractType
 			'label'     		=> 'Caption (Optional)',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
-		));	
+		));
 
-		$builder->add('link', 'text', array(
+	    $builder->add('effect', 'text', array(
+		    'label'     		=> 'Image Effect (Optional)',
+		    'required'			=> false,
+		    'error_bubbling' 	=> true,
+		    'attr'              => array('class' => 'section-effect')
+	    ));
+
+	    $builder->add('link', 'text', array(
 			'label'     		=> 'Link (Optional)',
 			'required'			=> false,
 			'error_bubbling' 	=> true,
