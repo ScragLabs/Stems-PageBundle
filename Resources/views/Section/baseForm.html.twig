@@ -1,6 +1,6 @@
 <section
-        class="col-{{ link.width }} section-{{ link.type|replace({('_'):'-'}) }} {% block classes %}{% endblock %}"
-        style="top:{{ link.y }}px;left:{{ link.x }}px;"
+        class="col-{{ link.span }} section-{{ link.type|replace({('_'):'-'}) }} {% if not link.pinned %}unpinned{% endif %}{% block classes %}{% endblock %}"
+        style="top:{{ link.y }}px;left:{{ link.x }}px;{% if not link.pinned %}width:{{ link.width }}px;height:{{ link.height }}px;{% endif %}"
         data-id="{{ link.id }}"
         data-type="{{ link.type }}"
         data-type-id="{{ section.id }}"
@@ -18,6 +18,9 @@
 	</div>
 	<input type="hidden" class="section-x" name="sections_x[{{ link.id }}]" value="{{ link.x }}">
 	<input type="hidden" class="section-y" name="sections_y[{{ link.id }}]" value="{{ link.y }}">
+    <input type="hidden" class="section-span" name="sections_span[{{ link.id }}]" value="{{ link.span }}">
     <input type="hidden" class="section-width" name="sections_width[{{ link.id }}]" value="{{ link.width }}">
+    <input type="hidden" class="section-height" name="sections_height[{{ link.id }}]" value="{{ link.height }}">
+    <input type="hidden" class="section-pinned" name="sections_pinned[{{ link.id }}]" value="{{ link.pinned }}">
 	<input type="hidden" name="sections[]" value="{{ link.id }}">
 </section>
