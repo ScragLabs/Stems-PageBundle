@@ -21,6 +21,6 @@
     <input type="hidden" class="section-span" name="sections_span[{{ link.id }}]" value="{{ link.span }}">
     <input type="hidden" class="section-width" name="sections_width[{{ link.id }}]" value="{{ link.width }}">
     <input type="hidden" class="section-height" name="sections_height[{{ link.id }}]" value="{{ link.height }}">
-    <input type="hidden" class="section-pinned" name="sections_pinned[{{ link.id }}]" value="{{ link.pinned }}">
+    <input type="hidden" class="section-pinned" name="sections_pinned[{{ link.id }}]" value="{{ link.pinned ? 1 : 0 }}">
 	<input type="hidden" name="sections[]" value="{{ link.id }}">
 </section>
