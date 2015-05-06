@@ -3,6 +3,8 @@
 namespace Stems\PageBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Stems\PageBundle\Entity\Layout;
+use Stems\PageBundle\Entity\Page;
 use Stems\PageBundle\Exception\PageNotFoundException;
 
 class PageRepository extends EntityRepository
@@ -17,15 +19,20 @@ class PageRepository extends EntityRepository
 	 */
 	public function load($slug, $options=array())
 	{
-		// load the relevant CMS page from the database
+		// Load the relevant CMS page from the database
 		$page = $this->findOneBy(array('slug' => $slug, 'deleted' => false));
 
-		// throw an error if the page wasn't found
+		// Create a new page entity if there isn't one stored in the database
 		if (!$page) {
-			throw new PageNotFoundException('The requested page could not be found.');
+			// @todo do this better
+			$page = new Page();
+			$page->setSlug($slug);
+			$layout = new Layout();
+			$layout->setSlug('content');
+			$page->setLayout($layout);
 		}
 
-		// override any custom values requested, as long as they are not blank
+		// Override any custom values requested, as long as they are not blank
 		if (array_key_exists('title', $options)) {
 			!empty($options['title']) and $page->setTitle($options['title']);
 		}

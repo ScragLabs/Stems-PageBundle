@@ -73,9 +73,6 @@ $(document).ready(function() {
 
     if ($('.layout-editor').length) {
 
-        $('.layout-editor section').draggable({
-            grid: [ 480, 5 ]
-        });
 
         // $('#packery-editor').packery('bindUIDraggableEvents', $('#packery-editor section'));
 
