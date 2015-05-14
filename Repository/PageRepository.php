@@ -23,14 +23,14 @@ class PageRepository extends EntityRepository
 		$page = $this->findOneBy(array('slug' => $slug, 'deleted' => false));
 
 		// Create a new page entity if there isn't one stored in the database
-		if (!$page) {
-			// @todo do this better
-			$page = new Page();
-			$page->setSlug($slug);
-			$layout = new Layout();
-			$layout->setSlug('content');
-			$page->setLayout($layout);
-		}
+//		if (!$page) {
+//			// @todo do this better
+//			$page = new Page();
+//			$page->setSlug($slug);
+//			$layout = new Layout();
+//			$layout->setSlug('content');
+//			$page->setLayout($layout);
+//		}
 
 		// Override any custom values requested, as long as they are not blank
 		if (array_key_exists('title', $options)) {
