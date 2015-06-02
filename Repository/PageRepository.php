@@ -17,10 +17,10 @@ class PageRepository extends EntityRepository
 	 * @return Page 					The page entity
 	 * @throws PageNotFoundException
 	 */
-	public function load($slug, $options=array())
+	public function load($slug, $options = [])
 	{
 		// Load the relevant CMS page from the database
-		$page = $this->findOneBy(array('slug' => $slug, 'deleted' => false));
+		$page = $this->findOneBy(['slug' => $slug, 'deleted' => false]);
 
 		// Create a new page entity if there isn't one stored in the database
 //		if (!$page) {
