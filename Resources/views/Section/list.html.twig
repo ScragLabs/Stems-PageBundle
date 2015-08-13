@@ -1,5 +1,7 @@
 {% extends 'StemsPageBundle:Section:base.html.twig' %}
 
+{% block classes %}{% spaceless %}text-align-{{ section.alignment }} {{ section.style }}-list{% endspaceless %}{% endblock %}
+
 {% block content %}
     <h5>{{ section.title }}</h5>
     <ul>
