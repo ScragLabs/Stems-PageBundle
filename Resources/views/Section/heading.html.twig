@@ -3,3 +3,5 @@
 {% block content %}
 	<{{ section.style }}>{{ section.content|raw }}</{{ section.style }}>
 {% endblock %}
+
+{% block classes %}{% spaceless %}text-align-{{ section.alignment }}{% endspaceless %}{% endblock %}
