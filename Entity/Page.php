@@ -176,9 +176,9 @@ class Page
     /**
      * Set layout
      *
-     * @param Stems\PageBundle\Entity\Layout $layout
+     * @param Layout $layout
      */
-    public function setLayout(\Stems\PageBundle\Entity\Layout $layout)
+    public function setLayout(Layout $layout)
     {
         $this->layout = $layout;
     }
@@ -186,7 +186,7 @@ class Page
     /**
      * Get layout
      *
-     * @return Stems\PageBundle\Entity\Layout 
+     * @return Layout
      */
     public function getLayout()
     {
@@ -196,9 +196,9 @@ class Page
     /**
      * Set parent
      *
-     * @param Stems\PageBundle\Entity\Page $parent
+     * @param Page $parent
      */
-    public function setParent(\Stems\PageBundle\Entity\Page $parent)
+    public function setParent(Page $parent)
     {
         $this->parent = $parent;
     }
@@ -206,7 +206,7 @@ class Page
     /**
      * Get parent
      *
-     * @return Stems\PageBundle\Entity\Page 
+     * @return Page
      */
     public function getParent()
     {
@@ -218,7 +218,7 @@ class Page
      *
      * @param Stems\childrenBundle\Entity\Page $children
      */
-    public function addChildren(\Stems\PageBundle\Entity\Page $children)
+    public function addChildren(Page $children)
     {
         $this->children[] = $children;
     }
@@ -512,9 +512,9 @@ class Page
     /**
      * Add section
      *
-     * @param Stems\PageBundle\Entity\Section $section
+     * @param Section $section
      */
-    public function addSection(\Stems\PageBundle\Entity\Section $section)
+    public function addSection(Section $section)
     {
         $this->sections[] = $section;
     }

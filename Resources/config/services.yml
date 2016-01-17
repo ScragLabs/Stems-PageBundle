@@ -1,2 +1,7 @@
 services:
-
+    threadandmirror.products.subscriber.product:
+        class: Stems\PageBundle\EventListener\StemsPageSubscriber
+        arguments:
+            - @annotations.reader
+        tags:
+            - { name: kernel.event_subscriber }
