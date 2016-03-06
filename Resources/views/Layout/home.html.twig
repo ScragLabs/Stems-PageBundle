@@ -4,29 +4,18 @@
 
 {% block layout %}
 	<div class="layout-homepage">
-		<div class="homepage-banner-wrapper">
-			<div class="homepage-banner"></div>
-			<h2 class="title-large-serif">Thread <span>&amp;</span> Mirror</h2>
-			<h1 class="title-faded-sans">Fashion and Beauty</h1>
-			<p class="title-italic-serif">created for you, curated by you</p>
+		<div class="homepage-banner">
+			<div class="homepage-banner__background"></div>
+			<h2 class="homepage-banner__title title-large-serif">Thread <span class="homepage-banner__title-ampersand">&amp;</span> Mirror</h2>
+			<h1 class="homepage-banner__subtitle title-faded-sans">Fashion and Beauty</h1>
+			{#<p class="homepage-banner__strapline title-italic-serif">created for you, curated by you</p>#}
 		</div>
-	   	<div class="cms-page">
+	   	<div>
 			{{ render(controller('StemsBlogBundle:Widget:homepageFeature')) }}
 			{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks')) }}
             {{ render(controller('StemsSocialBundle:Widget:homepageFeature')) }}
 			{{ render(controller('ThreadAndMirrorSocialBundle:Widget:homepageFeature')) }}
-			<div class="widget follow-us-widget">
-				<div class="wrap">
-					<p>Follow us</p>
-					<div class="social">
-						<a href="http://www.pinterest.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-pinterest"></i></a>
-						<a href="http://instagram.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-instagram"></i></a>
-						<a href="http://www.twitter.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-twitter"></i></a>
-						<a href="http://www.facebook.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-facebook"></i></a>
-						<br class="clear">
-					</div>
-				</div>
-			</div>
+            {% include 'ThreadAndMirrorCoreBundle:Widget:followUs.html.twig' %}
 			{% block breadcrumbs %}{% endblock %}
 			{% block title %}{% endblock %}
 			{% block content %}{% endblock %}
