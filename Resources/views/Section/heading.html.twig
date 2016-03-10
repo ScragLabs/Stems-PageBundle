@@ -1,7 +1,7 @@
 {% extends 'StemsPageBundle:Section:base.html.twig' %}
 
 {% block content %}
-	<{{ section.style }}>{{ section.content|raw }}</{{ section.style }}>
+	<{{ section.style }} class="section-heading__title--{{ section.style }}">{{ section.content|raw }}</{{ section.style }}>
 {% endblock %}
 
 {% block classes %}{% spaceless %}text-align-{{ section.alignment }}{% endspaceless %}{% endblock %}
