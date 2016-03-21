@@ -1,14 +1,10 @@
 {% extends 'StemsPageBundle:Section:base.html.twig' %}
 
 {% block content %}
-	<div class="image {{ section.position }}">
-		{% if section.link is not empty %}<a href="{{ section.link }}" target="_blank">{% endif %}
-			<img 
-				src="{{ getMediaImage(section.image).src }}" 
-				alt="{% if section.caption is not empty %}{{ section.caption }}{% else %}Image{% endif %}"
-			>
-			{% if section.caption is not empty %}<p class="image-caption">{{ section.caption }}</p>{% endif %}
+	<div class="section-image__container section-image__container--{{ section.position }}">
+		{% if section.link is not empty %}<a class="section-image__link" href="{{ section.link }}" target="_blank">{% endif %}
+			<img class="section-image__image section-image__image--{{ section.position }} section-image__image--{{ section.position }}--col-{{ link.span }}" src="{{ getMediaImage(section.image).src }}" alt="{% if section.caption is not empty %}{{ section.caption }}{% else %}Image{% endif %}">
+			{% if section.caption is not empty %}<p class="section-image__caption section-image__caption--{{ section.position }}">{{ section.caption }}</p>{% endif %}
 		{% if section.link is not empty %}</a>{% endif %}
 	</div>
 {% endblock %}
-	
