@@ -1,25 +1,24 @@
 {% extends stems_theme ~ '.html.twig' %}
 
-{% block windowTitle %}{{ page.windowTitle }}{% endblock %}
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
 
 {% block layout %}
-   <div class="cms-page">
-   		<div class="layout-banner">
-   			<div class="banner-wrapper">
-   				{% block banner %}<div class="banner" style="background-image:url('{{ getMediaImage(page.image).src|imagine_filter('page_banner') }}')">{% endblock %}
-   				</div>
-   				{% block title %}<h1>{{ page.title }}</h1>{% endblock %}
-   			</div>
-   			
-        	<div class="wrap">
-	        	
-	        	<div class="section">
-	            	{% block content %}
-	            		{% if page.content is not empty %}<div class="section-content">{{ page.content|raw }}</div>{% endif %}
-	            	{% endblock %}
-	            </div>
-				{% block dynamic %}{% endblock %}
-			</div>
+    <div class="content-layout-banner">
+        <div class="content-layout-banner__banner-wrapper">
+            <div class="content-layout-banner__title-alignment">
+                <div class="content-layout-banner__banner" style="background-image:url('{% block banner %}{% endblock %}');background-size: cover;"></div>
+                <div class="content-layout-banner__title-block">
+                    {% block title %}{% endblock %}
+                </div>
+            </div>
         </div>
+        <div class="container content-layout-banner__content">
+            <div class="content-layout-banner__content-padding">
+                <div class="content-layout-banner__content-wrapper">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        {% block dynamic %}{% endblock %}
     </div>
 {% endblock %}

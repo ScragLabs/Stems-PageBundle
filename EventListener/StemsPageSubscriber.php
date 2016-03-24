@@ -30,7 +30,7 @@ class StemsPageSubscriber implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return [
-				'kernel.controller' => 'onFilterController'
+			'kernel.controller' => 'onFilterController'
 		];
 	}
 

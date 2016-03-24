@@ -23,22 +23,6 @@ stems_admin_page_publish:
 
 # Front-end routes
 
-stems_page_front_test_mailer:
-    pattern:  /test-mailer
-    defaults: { _controller: StemsPageBundle:Front:emailTest }
-
-stems_page_front_home:
-    pattern:  /
-    defaults: { _controller: StemsPageBundle:Front:home }
-
-stems_page_front_redirect:
-    pattern:  /homepage
-    defaults: { _controller: StemsPageBundle:Front:redirect }
-
-stems_page_front_content:
-    pattern:  /{slug}
-    defaults: { _controller: StemsPageBundle:Front:page }
-
 
 stems_page_rest:
     resource: "@StemsPageBundle/Controller/RestController.php"

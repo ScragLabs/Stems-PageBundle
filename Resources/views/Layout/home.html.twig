@@ -1,9 +1,9 @@
 {% extends stems_theme ~ '.html.twig' %}
 
-{% block windowTitle %}{{ page.windowTitle }}{% endblock %}
+{% block windowTitle %}Home{% endblock %}
 
 {% block layout %}
-	<div class="layout-homepage">
+	<div class="homepage-layout">
 		<div class="homepage-banner">
 			<div class="homepage-banner__background"></div>
 			<h2 class="homepage-banner__title title-large-serif">Thread <span class="homepage-banner__title-ampersand">&amp;</span> Mirror</h2>
@@ -11,11 +11,6 @@
 			{#<p class="homepage-banner__strapline title-italic-serif">created for you, curated by you</p>#}
 		</div>
 	   	<div>
-			{{ render(controller('StemsBlogBundle:Widget:homepageFeature')) }}
-			{{ render(controller('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks')) }}
-            {{ render(controller('StemsSocialBundle:Widget:homepageFeature')) }}
-			{{ render(controller('ThreadAndMirrorSocialBundle:Widget:homepageFeature')) }}
-            {% include 'ThreadAndMirrorCoreBundle:Widget:followUs.html.twig' %}
 			{% block breadcrumbs %}{% endblock %}
 			{% block title %}{% endblock %}
 			{% block content %}{% endblock %}
