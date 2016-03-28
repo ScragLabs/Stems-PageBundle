@@ -140,7 +140,7 @@ class RestController extends BaseRestController
 	{
 		// Get the blog post and existing image
 		$em   = $this->getDoctrine()->getManager();
-		$link = $em->getRepository('StemsBlogBundle:Section')->findOneBy(array('entity' => $section->getId(), 'type' => 'image'));
+		$link = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->findOneBy(array('entity' => $section->getId(), 'type' => 'image'));
 
 		// Build and handle the form
 		$form = $this->createForm(new SectionImageType($link), $section);
