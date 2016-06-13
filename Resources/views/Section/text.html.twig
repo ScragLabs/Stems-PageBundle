@@ -1,5 +1,5 @@
 {% extends 'StemsPageBundle:Section:base.html.twig' %}
 
 {% block content %}
-	<p>{{ section.content|raw }}</p>
+	<p>{{ section.content|nl2br|raw }}</p>
 {% endblock %}
