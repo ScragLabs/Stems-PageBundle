@@ -140,7 +140,7 @@ class RestController extends BaseRestController
 	{
 		// Get the blog post and existing image
 		$em   = $this->getDoctrine()->getManager();
-		$link = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->findOneBy(array('entity' => $section->getId(), 'type' => 'image'));
+		$link = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->findOneBy(['entity' => $section->getId(), 'type' => 'image']);
 
 		// Build and handle the form
 		$form = $this->createForm(new SectionImageType($link), $section);
@@ -169,21 +169,22 @@ class RestController extends BaseRestController
 			$form = $this->createForm(new SectionImageType($link), $section);
 
 			// Render the section form and preview html with the valid values
-			$formHtml = $this->renderView('StemsPageBundle:Section:imageHiddenForm.html.twig', array(
+			$formHtml = $this->renderView('StemsPageBundle:Section:imageHiddenForm.html.twig', [
 				'form' => $form->createView(),
-			));
+			]);
 
-			$previewHtml = $this->renderView('StemsPageBundle:Section:imagePreview.html.twig', array(
+			$previewHtml = $this->renderView('StemsPageBundle:Section:imagePreview.html.twig', [
 				'section' => $section,
-			));
+				'link'    => $link
+			]);
 
 			// Set the meta data for the update callback
-			$meta = array(
+			$meta = [
 				'type'        => 'image',
 				'section'     => $section->getId(),
 				'formHtml'    => $formHtml,
 				'previewHtml' => $previewHtml
-			);
+			];
 
 			return $this->addMeta($meta)->setCallback('updateSectionForm')->success('Image updated.')->sendResponse();
 		} else {
