@@ -5,6 +5,7 @@
         {% else %}
             <img class="section-image__image section-image__image--{{ section.position }} section-image__image--{{ section.position }}--col-{{ link.span }} {% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ getMediaImage(section.image).src|imagine_filter('section_image_large') }}" />
         {% endif %}
+        {% if section.caption is not empty %}<p class="section-image__caption section-image__caption--{{ section.position }}">{{ section.caption }}</p>{% endif %}
         <div class="button-holder">
             <div>
                 <div>
